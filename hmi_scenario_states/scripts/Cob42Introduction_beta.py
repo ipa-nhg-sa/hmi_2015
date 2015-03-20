@@ -96,11 +96,12 @@ class CobIntroduction(smach.State):
         while True:
             rospy.loginfo("------ Menu ------")
             rospy.loginfo("0 = Introduction & lights, mimics")
-            rospy.loginfo("1 = Modules: base")
-            rospy.loginfo("2 = Modules: torso")
-            rospy.loginfo("3 = Modules: arms")
-            rospy.loginfo("4 = Modules: head")
-            rospy.loginfo("5 = Software highlights")
+            rospy.loginfo("1 = Modules: lights & display")
+            rospy.loginfo("2 = Modules: base")
+            rospy.loginfo("3 = Modules: torso")
+            rospy.loginfo("4 = Modules: arms")
+            rospy.loginfo("5 = Modules: head")
+            rospy.loginfo("6 = Software")
             while True:
                 try:          
                     usr_input = raw_input("Please type a number(int) for the scene to begin with:")
@@ -244,7 +245,7 @@ class CobIntroduction(smach.State):
 
             n = n+1
         
-        if n == 2:
+        if n == 3:
             # :: 2.Explain modules (torso)
             rospy.loginfo("Explaining modules(torso)")
             sss.set_light("light_base", "yellow", False)
@@ -259,7 +260,7 @@ class CobIntroduction(smach.State):
             
             n = n+1
         
-        if n == 3:
+        if n == 4:
 			# :: 3.Explain modules (arms)
             rospy.loginfo("Explaining modules(arms)")
             sss.set_light("light_base","yellow")
@@ -303,7 +304,7 @@ class CobIntroduction(smach.State):
             
             n = n+1
 
-        if n == 4:
+        if n == 5:
             # :: 4.Explain modules(head)
             rospy.loginfo("Explaining modules(head)")
             sss.set_light("light_torso","yellow", False)
@@ -320,7 +321,7 @@ class CobIntroduction(smach.State):
             sss.move("sensorring","right")
             sss.move("sensorring","front")
 
-        if n == 5:
+        if n == 6:
             # :: 5.Software highlights
             #sss.move("arm_right", "open", False)
             #sss.move("arm_left", "open", False)
