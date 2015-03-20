@@ -118,18 +118,6 @@ class CobIntroduction(smach.State):
             sss.move("arm_right", "side", False)
             sss.move("arm_left", "side")
 
-
-            rospy.loginfo("Hello and Welcome")
-            sss.say(["Hello and welcome to my presentation, my name is Care o bot. I'm a mobile service robot build by Fraunhofer I. P. A., in Stuttgart. Don't be afraid, i am a gentleman"], False)
-            wave_right_handle = sss.move("arm_right", "wave_hmi", False)
-            sss.move_base_rel("base", [0, 0, -0.78], False)
-            
-            sss.say(["I have a wide range of services. I can assist you at home or serve food and drinks in restaurants or hotels. In hospitals or care facilities I can support in various delivery tasks. Or i could work in a manufacturing enviroment shelf-picking and commissioning"], False)
-            rospy.sleep(1)
-            wave_right_handle.wait()
-            sss.move_base_rel("base", [0, 0, 1.57], False)
-            sss.move("arm_left", "wave_hmi", False)
-
             # sync
             sss.say(["Hello and welcome to my presentation, my name is Care o bot. I am a mobile service robot build by Fraunhofer I. P. A., in Stuttgart."], False)
             sss.move_base_rel("base", [0, 0, -0.78], False)
