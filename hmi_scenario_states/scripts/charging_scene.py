@@ -96,10 +96,9 @@ class CobIntroduction(smach.State):
         # :: Menue to select charging scenes
         while True:
             rospy.loginfo("0 = Do nothing(arms folded)")
-            rospy.loginfo("1 = Do nothing(arms outrstretched)")
-            rospy.loginfo("2 = Thinking (needs place to move)")
-            rospy.loginfo("3 = Gestures, randomized timing (needs place for arms)")
-            rospy.loginfo("4 = Wave right arm")
+            rospy.loginfo("1 = Do nothing(arms outstretched)")
+            rospy.loginfo("2 = Gestures, randomized timing (needs place for arms)")
+            rospy.loginfo("3 = Wave right arm")
             while True:
                 try: 
                     usr_input = raw_input("Please type a number(int) for the scene to begin with:")
@@ -122,14 +121,8 @@ class CobIntroduction(smach.State):
             sss.move("arm_left","home")
             ## To do: Mimics
 
-        #Walk around thinking
-        if n == 2:
-            sss.move("arm_right","folded",False)
-            sss.move("arm_left",[[0.4, 1.5, -1, 2.2, 0 , 0.4, 0]])
-            ## To do: walk left, turn, walrk right
-
         #Gestures with randomized timing
-        if n == 3:
+        if n == 2:
 
             random.seed()
         
@@ -165,9 +158,9 @@ class CobIntroduction(smach.State):
                 sss.move("arm_right", "folded")
         
         #Wave right arm
-        if n == 4:
+        if n == 3:
             loop_exit = True
-            while True:
+            while loop_exit:
                 sss.move("arm_right", "wave_hmi")
 
         return "succeeded"
