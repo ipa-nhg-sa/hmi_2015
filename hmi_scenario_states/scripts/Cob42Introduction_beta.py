@@ -8,12 +8,9 @@ import sys
 
 import random
 
+
 from simple_script_server import *
 sss = simple_script_server()
-
-##
-#Missing in simulation:
-#Movement of the base: sss.move_base_rel("base", [0.1[m], 0.1[m], 0.1[rad]], True)
 
 ## -- Initiation
 class CobIntroductionInit(smach.State):
@@ -142,8 +139,8 @@ class CobIntroduction(smach.State):
             #TODO show renderings on head display while explaining application domanis
             #sys.exit()
 
-                        # Explain lights & display
-            rospy.loginfo("Showing lights & mimis")
+            # Explain lights & display
+            rospy.loginfo("Showing lights & mimics")
             point2chest_handle = sss.move("arm_right","point2chest", False)
             sss.say(["For interaction with you and expressing my mood i am able to change my colored lights and use my head-integrated display"], False)
             point2chest_handle.wait()
@@ -188,7 +185,6 @@ class CobIntroduction(smach.State):
             sss.set_light("light_torso","red")
             sss.set_mimic("mimic", ["confused",0.3])
             handle_say_red.wait()
-            #sss.say(["Red, of course, means there is an error happening. Dont worry, i feel good right now, this is only to show you my colors. I hope you will never see me like this"])
             handle_say_blue = sss.say(["This blue means i am thinking and calculation on how to help you the best"], False)
             sss.set_light("light_base","blue", False)
             sss.set_light("light_torso","blue")
@@ -265,26 +261,25 @@ class CobIntroduction(smach.State):
             rospy.loginfo("Explaining modules(arms)")
             sss.set_light("light_base","yellow")
             sss.set_light("light_torso","yellow")
-            sss.move("arm_right","side", False)
-            sss.move("arm_left", "side")
-            sss.say(["as you can see, i have two arms. I can use them independently."])            
-            # Folded arm_right: [[0.9599, 1.5708, -0.12, 1.0, 1.38, 0.75, -1.36]]
-            sss.move("arm_right","folded",False)
+
+            folding_right_handle = sss.move("arm_right",["side", "reverse_folded", "side", "folded"], False)
+            folding_left_handle = sss.move("arm_left",["side", "reverse_folded", "side", "folded"], False) 
+            
+            sss.say(["as you can see, i have two arms. I can use them independently."], False)
             sss.say(["Both arms consist of 7 independent joints, allowing me to perform complex movements"], False)
-            sss.move("arm_left","folded")
-            # Reverse folded
-            sss.move("arm_right", [[-0.9599, -1.5708, 0.12, -1.0, -1.38, -0.75, 1.36]], False)
-            sss.move("arm_left", [[0.9599, 1.5708, -0.12, 1.0, 1.38, 0.75, -1.36]])
-            # End Reverse folded
+            sss.say(["My arms and joints were developed by Schunk Shounk Shoonk."])
+
+            folding_right_handle.wait()
+            folding_left_handle.wait()
             sss.move("arm_right", "side", False)
             sss.move("arm_right", "side")
             sss.set_light("light_base","cyan")
             sss.set_light("light_torso","cyan")
-            # :: 3.1.Hands
-            #sss.move("arm_right", "carry", False)
-            #sss.move("arm_left", "carry", False)
+
             sss.say(["Not only do i have arms, but also hands."])
             ## Open , close hands
+            sss.set_light("light_base","yellow", False)
+            sss.set_light("light_torso","yellow")
             sss.move_base_rel("base",[0,0,0.3])
             sss.move("gripper_right","open")
             sss.move_base_rel("base",[0,0,-0.6])
@@ -293,10 +288,9 @@ class CobIntroduction(smach.State):
             sss.move_base_rel("base",[0,0,0.3])
             sss.move("gripper_right","closed", False)
             sss.move("gripper_left","closed")
+            sss.set_light("light_base","cyan", False)
+            sss.set_light("light_torso","cyan")
             sss.say(["So i could not only entertain you, but actually help you carry stuff around in your apartment"])		
-            
-            sss.move("arm_right", "side", False)
-            sss.move("arm_left", "folded")
             
             n = n+1
 
@@ -320,17 +314,16 @@ class CobIntroduction(smach.State):
 
         if n == 6:
             # :: 5.Software highlights
-            #sss.move("arm_right", "open", False)
-            #sss.move("arm_left", "open", False)
             sss.say(["Now that you have seen my hardware highlights, i'll tell you something about my software"])
             sss.set_mimic("mimic",["blinking_right",0.2])
-            sss.say(["I am shipped with open source drivers and powered by the Open Source Robot Operating System"])            
+            sss.say(["I am shipped with open source drivers and powered by the Open Source Robot Operating System"])
+            sss.say(["This architecture allows you and others to modify me and use me as an experimental robot for your own researches"])          
             
         ## :: Final
         rospy.loginfo("Final/Exit scene reached")
         sss.set_mimic("mimic","happy")
         sss.say(["Now, my presentation has finally come to and end"])
-        sss.say(["Thank you for your intereset"])
+        sss.say(["Thank you for your interest"])
         sss.move_base_rel("base", [0, 0, 0.5])
         sss.say(["Thank you"])
         sss.move_base_rel("base", [0, 0, -1], False)
@@ -356,7 +349,7 @@ class CobIntroduction(smach.State):
             sss.move("arm_right", "folded")
 
         if i == 1:
-            ## Find cookies, bring them to the viewers
+            ## Find cookies, bring them to the viewers, enviroment dependent
             pass
 
         return "succeeded"
