@@ -13,7 +13,7 @@ from simple_script_server import *
 sss = simple_script_server()
 
 ## This script does not move the Robot.
-## With a sleep time of 20 sec. COB 42 changes colors and mimics.
+## COB4 only changes colors and mimics.
 ## One can use this script while charging for entertainment.
 
 ## -- Initiation
@@ -23,17 +23,17 @@ class CobColorsInit(smach.State):
             outcomes=['succeeded','failed'])
             
     def execute(self, userdata):
-        handle_base = sss.init("base")
-        handle_arm_left = sss.init("arm_left")
-        handle_arm_right = sss.init("arm_right")
+        #handle_base = sss.init("base")
+        #handle_arm_left = sss.init("arm_left")
+        #handle_arm_right = sss.init("arm_right")
         #handle_sensorring = sss.init("sensorring")
 
-        if handle_base.get_error_code() != 0:
-            return "failed"
-        if handle_arm_left.get_error_code() != 0:
-            return "failed"
-        if handle_arm_right.get_error_code() != 0:
-            return "failed"
+        #if handle_base.get_error_code() != 0:
+        #    return "failed"
+        #if handle_arm_left.get_error_code() != 0:
+        #    return "failed"
+        #if handle_arm_right.get_error_code() != 0:
+        #    return "failed"
         #if handle_sensorring.get_error_code() != 0:
             #return "failed"
 
@@ -45,17 +45,17 @@ class CobColorsRecover(smach.State):
             outcomes=['succeeded','failed'])
             
     def execute(self, userdata):
-        handle_base = sss.recover("base")
-        handle_arm_left = sss.recover("arm_left")
-        handle_arm_right = sss.recover("arm_right")
+        #handle_base = sss.recover("base")
+        #handle_arm_left = sss.recover("arm_left")
+        #handle_arm_right = sss.recover("arm_right")
         #handle_sensorring = sss.recover("sensorring")
 
-        if handle_base.get_error_code() != 0:
-            return "failed"
-        if handle_arm_left.get_error_code() != 0:
-            return "failed"
-        if handle_arm_right.get_error_code() != 0:
-            return "failed"
+        #if handle_base.get_error_code() != 0:
+        #    return "failed"
+        #if handle_arm_left.get_error_code() != 0:
+        #    return "failed"
+        #if handle_arm_right.get_error_code() != 0:
+        #    return "failed"
         #if handle_sensorring.get_error_code() != 0:
             #return "failed"
 
@@ -68,18 +68,18 @@ class CobColorsPrepare(smach.State):
             outcomes=['succeeded','failed'])
             
     def execute(self, userdata):
-        handle_arm_left = sss.move("arm_left", "folded",False)
-        handle_arm_right = sss.move("arm_right", "folded",False)
+        #handle_arm_left = sss.move("arm_left", "folded",False)
+        #handle_arm_right = sss.move("arm_right", "folded",False)
         #handle_sensorring = sss.move("sensorring", "front",False)
 
-        handle_arm_left.wait()
-        handle_arm_right.wait()
+        #handle_arm_left.wait()
+        #handle_arm_right.wait()
         #handle_sensorring.wait()
 
-        if handle_arm_left.get_error_code() != 0:
-            return "failed"
-        if handle_arm_right.get_error_code() != 0:
-            return "failed"
+        #if handle_arm_left.get_error_code() != 0:
+        #    return "failed"
+        #if handle_arm_right.get_error_code() != 0:
+        #    return "failed"
         #if handle_sensorring.get_error_code() != 0:
             #return "failed"
 
@@ -96,9 +96,9 @@ class CobColors(smach.State):
         sleep_time = 20
         
         rospy.loginfo("This script does not move the Robot.")
-        rospy.loginfo("COB42 only changes colors and mimics.")
+        rospy.loginfo("COB4 only changes colors and mimics.")
         rospy.loginfo("You can use this script while charging for entertainment.")
-        rospy.loginfo("Sleep time: " + str(sleep_time))
+        rospy.loginfo("Sleep time is set to: " + str(sleep_time) +" sec")
         
         sss.set_light("light_base","cyan",False)
         sss.set_light("light_torso", "cyan")
@@ -118,7 +118,7 @@ class CobColors(smach.State):
             sss.set_mimic("mimic","falling_asleep",False)
             rospy.sleep(6)
             sss.set_mimic("mimic","sleeping")
-            rospy.sleep(20)
+            rospy.sleep(10)
             sss.set_mimic("mimic","waking_up",False)
             rospy.sleep(5)
             sss.set_mimic("mimic","happy")
@@ -156,8 +156,7 @@ class CobColors(smach.State):
             sss.set_mimic("mimic","laughing",False)
             rospy.sleep(6)
             sss.set_mimic("mimic","happy")
-            
-                        
+                                              
         return "succeeded"
 
 ## -- State Machine 

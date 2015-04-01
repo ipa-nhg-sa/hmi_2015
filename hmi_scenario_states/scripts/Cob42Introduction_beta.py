@@ -77,7 +77,7 @@ class CobIntroductionPrepare(smach.State):
         if handle_arm_right.get_error_code() != 0:
             return "failed"
         #if handle_sensorring.get_error_code() != 0:
-            r#eturn "failed"
+            #return "failed"
 
         return "succeeded"
 
@@ -142,7 +142,7 @@ class CobIntroduction(smach.State):
             # Explain lights & display
             rospy.loginfo("Showing lights & mimics")
             point2chest_handle = sss.move("arm_right","point2chest", False)
-            sss.say(["For interaction with you and expressing my mood i am able to change my colored lights and use my head-integrated display"], False)
+            sss.say(["For interaction with you and expressing my mood i am able to change my colored lights and use my head-integrated display which can also be used as touch interface"], False)
             point2chest_handle.wait()
             sss.move("arm_right","side", False)
             sss.set_mimic("mimic",["laughing",0,3])
@@ -158,7 +158,7 @@ class CobIntroduction(smach.State):
 
             # Explain lights & display
             sss.set_mimic("mimic",["laughing",0,1])
-            sss.say(["I can use my eyes for interacting with humans."])
+            sss.say(["I can use my eyes and mimics for interacting with humans."])
             rospy.sleep(2)
             sss.move("arm_left","point2base", False)
             sss.say(["and express my mood by changing color in my torso and base."])
@@ -185,7 +185,7 @@ class CobIntroduction(smach.State):
             sss.set_light("light_torso","red")
             sss.set_mimic("mimic", ["confused",0.3])
             handle_say_red.wait()
-            handle_say_blue = sss.say(["This blue means i am thinking and calculation on how to help you the best"], False)
+            handle_say_blue = sss.say(["This blue means i am thinking and calculating on how to help you the best"], False)
             sss.set_light("light_base","blue", False)
             sss.set_light("light_torso","blue")
             handle_say_blue.wait()
@@ -214,7 +214,7 @@ class CobIntroduction(smach.State):
         if n == 2: 
             # :: 1.Explaing modules(base)
             rospy.loginfo("Explaining modules(base)")       
-            sss.say(["I consist of 4 elementary parts: base, torso, arms and head, i'll start with my base."], False)
+            sss.say(["I consist of 4 elementary parts: base, torso, arms and head. I'll start with my base."], False)
             sss.set_light("light_torso", "yellow", False)
             sss.set_light("light_base", "yellow")
             sss.move("arm_right", "point2base")
@@ -237,7 +237,7 @@ class CobIntroduction(smach.State):
             sss.set_light("light_base", "cyan", False)
             sss.set_light("light_torso", "cyan")
             sss.say(["And, of course, i can combine those movements"])
-            sss.say(["Using my safety laser scanners in the base I can safely navigate between humans, therefore we can share the same workspace together."])  
+            sss.say(["Using my safety laser scanners in the base I can safely navigate between moving humans and objects, therefore we can share the same workspace and environment together."])  
 
             n = n+1
         
@@ -246,13 +246,14 @@ class CobIntroduction(smach.State):
             rospy.loginfo("Explaining modules(torso)")
             sss.set_light("light_base", "yellow", False)
             sss.set_light("light_torso", "yellow")
+            sss.say(["The next module is my torso, you have already seen the lights i can change and use to interact with you"], False)
             sss.move("arm_right","point2chest")
             sss.move("arm_right","draw_torso", False)
-            sss.say(["The next module is my torso, you have already seen the lights i can change and use to interact with you"])
+            ## sss.say(["?? Reach floor and shelf ???"])
             sss.move("arm_right","point2camera")
             sss.set_light("light_base","cyan", False)
             sss.set_light("light_torso", "cyan", False)
-            sss.say(["Here i have 3d cameras helping me to navigate and recognize obstacles "])
+            sss.say(["Here i have 3d cameras helping me to navigate and recognize obstacles"])
             
             n = n+1
         
@@ -265,9 +266,9 @@ class CobIntroduction(smach.State):
             folding_right_handle = sss.move("arm_right",["side", "reverse_folded", "side", "folded"], False)
             folding_left_handle = sss.move("arm_left",["side", "reverse_folded", "side", "folded"], False) 
             
-            sss.say(["as you can see, i have two arms. I can use them independently."], False)
-            sss.say(["Both arms consist of 7 independent joints, allowing me to perform complex movements"], False)
-            sss.say(["My arms and joints were developed by Schunk Shounk Shoonk."])
+            sss.say(["as you can see, i have two arms. I can use them independently and thanks to sensors i am able to share the same workspace with humans."])
+            sss.say(["My arms and joints were developed in cooperation with Schunk Shounk Shoonk and follow the shape of human arms."])
+            sss.say(["Both arms consist of 7 independent joints, allowing me to perform complex movements."])
 
             folding_right_handle.wait()
             folding_left_handle.wait()
@@ -284,13 +285,13 @@ class CobIntroduction(smach.State):
             sss.move("gripper_right","open")
             sss.move_base_rel("base",[0,0,-0.6])
             sss.move("gripper_left","open")
-            sss.say(["Combined with my 3D-Sensors i am able to recognize objects and grab or manipulate them"], False)
+            sss.say(["Combined with my 3D-Sensors i am able to recognize objects and grab or manipulate them from the floor or even closed shelfs"], False)
             sss.move_base_rel("base",[0,0,0.3])
             sss.move("gripper_right","closed", False)
             sss.move("gripper_left","closed")
             sss.set_light("light_base","cyan", False)
             sss.set_light("light_torso","cyan")
-            sss.say(["So i could not only entertain you, but actually help you carry stuff around in your apartment"])		
+            sss.say(["As you can see, I can not only entertain, but actually support your work or lifestyle by carring and grasp small objects"])		
             
             n = n+1
 
@@ -306,7 +307,7 @@ class CobIntroduction(smach.State):
             sss.set_mimic("mimic",["surprised",0.3])
             #sss.move("arm_right", "side")
             sss.set_mimic("mimic","happy")
-            sss.say(["To detect objects and recognize people i can move my movable sensor ring"], False)
+            sss.say(["To detect objects and recognize people i can move my movable sensor ring which is important for integrating me in dynamic human environments"], False)
             sss.move("sensorring","left")
             sss.move("sensorring","right")
             sss.move("sensorring","front")
@@ -317,24 +318,21 @@ class CobIntroduction(smach.State):
             sss.say(["Now that you have seen my hardware highlights, i'll tell you something about my software"])
             sss.set_mimic("mimic",["blinking_right",0.2])
             sss.say(["I am shipped with open source drivers and powered by the Open Source Robot Operating System"])
-            sss.say(["This architecture allows you and others to modify me and use me as an experimental robot for your own researches"])          
+            sss.say(["This architecture allows you and others to modify me and use me as an experimental robot for your own researches"])
+            sss.set_mimic("mimic",["yes",0.1])
+            sss.say(["You can buy me as a complete package with different module settings, for example special sensors or different degrees of freedom"])
+                   
             
         ## :: Final
         rospy.loginfo("Final/Exit scene reached")
-        sss.set_mimic("mimic","happy")
+        sss.set_mimic("mimic",["happy",0.04])
         sss.say(["Now, my presentation has finally come to and end"])
-        sss.say(["Thank you for your interest"])
-        sss.move_base_rel("base", [0, 0, 0.5])
-        sss.say(["Thank you"])
-        sss.move_base_rel("base", [0, 0, -1], False)
-        sss.say(["Thank you for your attention"])
-        sss.move_base_rel("base", [0, 0, 0.5])
 
         #Menu to select finishing action
         rospy.loginfo("------ Menu for exit scenes ------")
         rospy.loginfo("!!!DEPENTS FROM ENVIROMENT - BE CAREFUL!!!")
         rospy.loginfo("0 = arms folded")
-        rospy.loginfo("1 = bring flyers")
+        rospy.loginfo("1 = take business cards")
         while True:
             try:
                 user_input=raw_input("Please select how to finish the presentation:")
@@ -349,9 +347,18 @@ class CobIntroduction(smach.State):
             sss.move("arm_right", "folded")
 
         if i == 1:
-            ## Find cookies, bring them to the viewers, enviroment dependent
+            ## Get "cookies", bring them to the viewers, environment dependent
+            sss.set_mimic("mimic",["happy",0.04])
+            sss.say(["If you wait some seconds i will bring you some prospects and my personal business card"])
             pass
-
+        
+        sss.say(["Thank you for your interest"])
+        sss.move_base_rel("base", [0, 0, 0.5])
+        sss.say(["Thank you"])
+        sss.move_base_rel("base", [0, 0, -1], False)
+        sss.say(["Thank you for your attention"])
+        sss.move_base_rel("base", [0, 0, 0.5])
+        
         return "succeeded"
 
 ## -- State Machine 
