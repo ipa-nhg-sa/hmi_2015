@@ -285,7 +285,7 @@ class CobIntroduction(smach.State):
             sss.move("gripper_right","open")
             sss.move_base_rel("base",[0,0,-0.6])
             sss.move("gripper_left","open")
-            sss.say(["Combined with my 3D-Sensors i am able to recognize objects and manipulate or grab them from the floor or even closed shelfs"], False)
+            sss.say(["Combined with my 3D-Sensors i am able to recognize objects and manipulate or grab them from the floor or shelfs"], False)
             sss.move_base_rel("base",[0,0,0.3])
             sss.move("gripper_right","closed", False)
             sss.move("gripper_left","closed")
