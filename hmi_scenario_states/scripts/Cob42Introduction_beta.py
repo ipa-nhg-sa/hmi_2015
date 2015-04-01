@@ -249,7 +249,7 @@ class CobIntroduction(smach.State):
             sss.say(["The next module is my torso, you have already seen the lights i can change and use to interact with you"], False)
             sss.move("arm_right","point2chest")
             sss.move("arm_right","draw_torso", False)
-            ## sss.say(["?? Reach floor and shelf ???"])
+            sss.say(["My torso also is agile and can swing around, allowing me to grab objects from the floor or shelfs"])
             sss.move("arm_right","point2camera")
             sss.set_light("light_base","cyan", False)
             sss.set_light("light_torso", "cyan", False)
@@ -284,11 +284,13 @@ class CobIntroduction(smach.State):
             sss.move_base_rel("base",[0,0,0.3])
             sss.move("gripper_right","open")
             sss.move_base_rel("base",[0,0,-0.6])
-            sss.move("gripper_left","open")
+            sss.move("gripper_right","closed")
+            #sss.move("gripper_left","open")
             sss.say(["Combined with my 3D-Sensors i am able to recognize objects and manipulate or grab them from the floor or shelfs"], False)
+            sss.move("grupper_right","open")
             sss.move_base_rel("base",[0,0,0.3])
             sss.move("gripper_right","closed", False)
-            sss.move("gripper_left","closed")
+            #sss.move("gripper_left","closed")
             sss.set_light("light_base","cyan", False)
             sss.set_light("light_torso","cyan")
             sss.say(["As you can see, I can not only entertain, but actually support your work or lifestyle by carrying and grasp small objects"])		
@@ -319,9 +321,11 @@ class CobIntroduction(smach.State):
             sss.set_mimic("mimic",["blinking_right",0.2])
             sss.say(["I am shipped with open source drivers and powered by the Open Source Robot Operating System"])
             sss.say(["This architecture allows you and others to modify me and use me as an experimental robot for your own researches"])
-            
+            sss.say(["You can visit my community through the ros dot org website"])
+                        
             sss.set_mimic("mimic",["yes",0.1])
             sss.say(["You can buy me as a complete package with different module settings, for example special sensors or different degrees of freedom"])
+            sss.say(["For further informations please visit my website care minus o minus bot minus four dot com"])
                    
             
         ## :: Final
