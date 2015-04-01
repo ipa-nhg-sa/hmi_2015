@@ -266,7 +266,7 @@ class CobIntroduction(smach.State):
             folding_right_handle = sss.move("arm_right",["side", "reverse_folded", "side", "folded"], False)
             folding_left_handle = sss.move("arm_left",["side", "reverse_folded", "side", "folded"], False) 
             
-            sss.say(["as you can see, i have two arms. I can use them independently and thanks to sensors i am able to share the same workspace with humans."])
+            sss.say(["As you can see, i have two agile arms. I can use them independently and thanks to sensors i am able to share the same workspace with humans."])
             sss.say(["My arms and joints were developed in cooperation with Schunk Shounk Shoonk and follow the shape of human arms."])
             sss.say(["Both arms consist of 7 independent joints, allowing me to perform complex movements."])
 
@@ -285,13 +285,13 @@ class CobIntroduction(smach.State):
             sss.move("gripper_right","open")
             sss.move_base_rel("base",[0,0,-0.6])
             sss.move("gripper_left","open")
-            sss.say(["Combined with my 3D-Sensors i am able to recognize objects and grab or manipulate them from the floor or even closed shelfs"], False)
+            sss.say(["Combined with my 3D-Sensors i am able to recognize objects and manipulate or grab them from the floor or even closed shelfs"], False)
             sss.move_base_rel("base",[0,0,0.3])
             sss.move("gripper_right","closed", False)
             sss.move("gripper_left","closed")
             sss.set_light("light_base","cyan", False)
             sss.set_light("light_torso","cyan")
-            sss.say(["As you can see, I can not only entertain, but actually support your work or lifestyle by carring and grasp small objects"])		
+            sss.say(["As you can see, I can not only entertain, but actually support your work or lifestyle by carrying and grasp small objects"])		
             
             n = n+1
 
@@ -307,7 +307,7 @@ class CobIntroduction(smach.State):
             sss.set_mimic("mimic",["surprised",0.3])
             #sss.move("arm_right", "side")
             sss.set_mimic("mimic","happy")
-            sss.say(["To detect objects and recognize people i can move my movable sensor ring which is important for integrating me in dynamic human environments"], False)
+            sss.say(["To detect objects and recognize people i can move my exchangeable sensor ring allowing me to move and operate in dynamic human environments"], False)
             sss.move("sensorring","left")
             sss.move("sensorring","right")
             sss.move("sensorring","front")
@@ -319,6 +319,7 @@ class CobIntroduction(smach.State):
             sss.set_mimic("mimic",["blinking_right",0.2])
             sss.say(["I am shipped with open source drivers and powered by the Open Source Robot Operating System"])
             sss.say(["This architecture allows you and others to modify me and use me as an experimental robot for your own researches"])
+            
             sss.set_mimic("mimic",["yes",0.1])
             sss.say(["You can buy me as a complete package with different module settings, for example special sensors or different degrees of freedom"])
                    
@@ -349,15 +350,19 @@ class CobIntroduction(smach.State):
         if i == 1:
             ## Get "cookies", bring them to the viewers, environment dependent
             sss.set_mimic("mimic",["happy",0.04])
-            sss.say(["If you wait some seconds i will bring you some prospects and my personal business card"])
+            sss.say(["If you wait some seconds i will bring you some prospects and my personal business cards"])
             pass
         
+        sss.set_light("light_torso", "yellow", False)
+        sss.set_light("light_base","yellow")
         sss.say(["Thank you for your interest"])
         sss.move_base_rel("base", [0, 0, 0.5])
         sss.say(["Thank you"])
         sss.move_base_rel("base", [0, 0, -1], False)
         sss.say(["Thank you for your attention"])
         sss.move_base_rel("base", [0, 0, 0.5])
+        sss.set_light("light_torso","cyan",False)
+        sss.set_light("light_base","cyan")
         
         return "succeeded"
 
