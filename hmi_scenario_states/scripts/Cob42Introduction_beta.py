@@ -225,12 +225,13 @@ class CobIntroduction(smach.State):
             sss.set_light("light_torso", "yellow")
             sss.say(["The next module is my torso, you have already seen the lights i can change and use to interact with you"], False)
             sss.move("arm_right","point2chest")
-            sss.move("arm_right","draw_torso", False)
+            handle_drawtorso = sss.move("arm_right","draw_torso", False)
             sss.say(["My torso also is agile and can swing around, allowing me to grab objects from the floor or shelfs"])
+            handle_drawtorso.wait()
             sss.move("arm_right","point2camera")
             sss.set_light("light_base","cyan", False)
             sss.set_light("light_torso", "cyan", False)
-            sss.say(["Here i have 3d cameras helping me to navigate and recognize obstacles"])
+            sss.say(["Here i have 3d cameras helping me to navigate by recognizing and avoiding obstacles."])
             
             n = n+1
         
