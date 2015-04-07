@@ -88,7 +88,7 @@ class CobIntroduction(smach.State):
             outcomes=['succeeded','failed'])
 			
     def execute(self, userdata):
-        
+        n = 0
         # :: Menue to select scenes
         while True:
             rospy.loginfo("------ Menu ------")
@@ -152,7 +152,7 @@ class CobIntroduction(smach.State):
 
             # sync
             rospy.sleep(0.5)
-            handle_say = sss.say(["If I light up in yellow that means that I am moving my base or my arms, so please pay attention"], False)
+            handle_say = sss.say(["If I light up in yellow that means that I am moving my base or my arms, so please pay attention."], False)
             sss.move_base_rel("base", [0, 0, -0.35], False)
             sss.set_mimic("mimic", ["busy",0,1], False)
             rospy.sleep(1)
@@ -165,7 +165,7 @@ class CobIntroduction(smach.State):
             rospy.sleep(3)
 
             # sync
-            handle_say = sss.say(["If you see me in red, there is an error and I need help. But dont worry, I feel good right now, this is only to show you my colors. I hope you will never see me like this"], False)
+            handle_say = sss.say(["If you see me in red, there is an error and I need help. But don't worry, I feel good right now, this is only to show you my colors. I hope you will never see me like this"], False)
             sss.set_mimic("mimic", ["confused",0,1], False)
             sss.set_light("light_base","red", False)
             sss.set_light("light_torso","red", False)
@@ -288,6 +288,7 @@ class CobIntroduction(smach.State):
             sss.set_light("light_base","cyan", False)
             sss.say(["And finally, something i always forget, my head"])
             sss.set_mimic("mimic",["surprised",0.3])
+            sss.say(["My face is a touch screen not only able to display informations or graphics but also to be used as a human machine interface."])
             #sss.move("arm_right", "side")
             sss.set_mimic("mimic","happy")
             sss.say(["To detect objects and recognize people i can move my exchangeable sensor ring allowing me to navigate and operate in dynamic human environments"], False)
@@ -298,15 +299,15 @@ class CobIntroduction(smach.State):
 
         if n == 6:
             # :: 5.Software highlights
-            sss.say(["Now that you have seen my hardware highlights, i'll tell you something about my software"])
+            sss.say(["Now that you have seen my hardware highlights, i'll tell you something about my software."])
             sss.set_mimic("mimic",["blinking_right",0.2])
-            sss.say(["I am shipped with open source drivers and powered by the Open Source Robot Operating System"])
-            sss.say(["This architecture allows you and others to modify me and use me as an experimental robot for your own researches"])
-            sss.say(["You can visit my community through the ros dot org website"])
+            sss.say(["I am shipped with open source drivers and powered by the Open Source Robot Operating System."])
+            sss.say(["This architecture allows you and others to modify me and use me as an experimental robot for your own researches."])
+            sss.say(["You can visit my community through the ros dot org website."])
                         
             sss.set_mimic("mimic",["yes",0.1])
-            sss.say(["You can buy me as a complete package with customized module configurations, for example special sensors or different degrees of freedom"])
-            sss.say(["For further informations please visit my website care minus o minus bot minus four dot com"])
+            sss.say(["You can buy me as a complete package with customized module configurations, for example special sensors or different degrees of freedom."])
+            sss.say(["For further informations please visit my website: care minus o minus bot minus four dot com"])
                    
             
         ## :: Final
