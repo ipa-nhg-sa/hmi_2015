@@ -137,7 +137,7 @@ class CobColors(smach.State):
             sss.set_mimic("mimic","blinking_right",False)
             rospy.sleep(2)
             sss.set_mimic("mimic","happy")
-            rospy.sleep(5)
+            rospy.sleep(sleep_time)
             sss.set_mimic("mimic","blinking_left",False)
             rospy.sleep(2)
             sss.set_mimic("mimic","happy")
