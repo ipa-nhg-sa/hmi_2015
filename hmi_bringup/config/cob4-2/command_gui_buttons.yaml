@@ -19,9 +19,13 @@ group5:
     [home,move,home],
     [folded,move,folded],
     [side, move, side],
+<<<<<<< HEAD
     [hug, move, hug],
     [wave, move, wave_hmi],
     [rev_folded(!), move, reverse_folded]]
+=======
+    [hug, move, hug]]
+>>>>>>> 3f13299ebc24803ee8391a9a32ef2f3015a5c7b0
 group6:
   group_name: arm_right
   component_name: arm_right
@@ -31,7 +35,34 @@ group6:
     [home,move,home],
     [folded,move,folded],
     [side, move, side],
+<<<<<<< HEAD
     [hug, move, hug],
     [wave, move, wave_hmi],
     [rev_folded(!), move, reverse_folded]]
 
+=======
+    [hug, move, hug]]
+group7:
+  group_name: gripper_left
+  component_name: gripper_left
+  buttons: [[stop,stop],
+    [recover,recover],
+    [home,move,home],
+    [open,move,open],
+    [close, move, close]]
+group8:
+  group_name: gripper_right
+  component_name: gripper_right
+  buttons: [[stop,stop],
+    [recover,recover],
+    [home,move,home],
+    [open,move,open],
+    [close, move, close]]
+group91:
+  group_name: hmi
+  component_name: hmi
+  buttons: [[pause,trigger,select_pause],
+    [intro,trigger,select_intro],
+    [roses,trigger,select_roses],
+    [ball,trigger,select_ball]]
+>>>>>>> 3f13299ebc24803ee8391a9a32ef2f3015a5c7b0
